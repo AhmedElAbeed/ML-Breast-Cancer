@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="og:title" content="HOPE: Smart Disease Predictor">
+  <meta name="author" content="KANCHI TANK">
+  <meta name="og:image" content="static/favicon.ico">
+  <title>Hope</title>
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico?v=2" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+  <style>
+    body {
+      font-family: Cambria;
+      height: 100%;
+      background-image: linear-gradient(#ff6f91, #ffccda); /* Dégradé rose */
+      margin: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      padding-top: 80px; /* Padding for the navbar */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="background-image: linear-gradient(#d6446e, #d6446e) !important;">
+    <a href="/" class="navbar-brand"><img src="static/logo.png" height="70px" width="180px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a href="/" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a href="/breast-cancer-prediction" class="nav-link">Breast Cancer</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container-fluid" style="margin-bottom: 20px;">
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+          <center><h1 style="color:white;">Breast Cancer Predictor</h1></center>
+          <div class="card card-body" style="border: 1px solid black; background-color: #ffc1c9"> <!-- Fond rose -->
+            <form class="form-horizontal" action="{{ url_for('predictPage') }}" method="POST">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="texture_mean" placeholder="Texture Mean">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="smoothness_mean" placeholder="Smoothness Mean">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="compactness_mean" placeholder="Compactness Mean">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="concave points_mean" placeholder="Concave Points Mean">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="symmetry_mean" placeholder="Symmetry Mean">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="fractal_dimension_mean" placeholder="Fractal Dimension Mean">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="texture_se" placeholder="Texture Standard Error">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="area_se" placeholder="Area Standard Error">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="smoothness_se" placeholder="Smoothness Standard Error">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="compactness_se" placeholder="Compactness Standard Error">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="concavity_se" placeholder="Concavity Standard Error">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="concave points_se" placeholder="Concave Points Standard Error">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="symmetry_se" placeholder="Symmetry Standard Error">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="fractal_dimension_se" placeholder="Fractal Dimension Standard Error">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="texture_worst" placeholder="Texture Worst">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="area_worst" placeholder="Area Worst">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="smoothness_worst" placeholder="Smoothness Worst">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="compactness_worst" placeholder="Compactness Worst">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="concavity_worst" placeholder="Concavity Worst">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="concave points_worst" placeholder="Concave Points Worst">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="symmetry_worst" placeholder="Symmetry Worst">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <input style="border: 1px solid black; background-color: #ffe3e8" class="form-control" type="text" name="fractal_dimension_worst" placeholder="Fractal Dimension Worst">
+                  </div>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+
+              <input style="background-color: #ff6f91" type="submit" class="btn btn-info btn-block" value="Predict"> <!-- Bouton rose vif -->
+            </form>
+          </div>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer style="background-image: linear-gradient(#d6446e, #d6446e) !important;">
+    <center>
+      <ul style="list-style-type:none;">
+        <li><p style="color: white;">Made with <span style="color: red;">&hearts;</span> by Me and Hamoudi</p></li>
+      </ul>
+    </center>
+  </footer>
+
+</body>
+</html>
